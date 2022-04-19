@@ -4,20 +4,29 @@ import { PageTemplate, DishList} from "@/components";
 import Styles from "../../styles/discovery.module.css";
 import { api } from "@/services";
 import { CityProps, ParamsStaticProps, PageDiscoverProps } from "@/types";
+import Head from "next/head";
 
 export default function Descobrir(props: PageDiscoverProps){
     const { city } = props;
 
     return(
-        <PageTemplate>
-            <div className={Styles.content}>
-                <h1>Opções na região de {city.name}</h1>
-                <p>Encontramos {city.catalogEstimated} opções</p>
-                <div className={Styles.items}>
-                    <DishList citySlug={city.slug} />
+        <>
+            <Head>
+                <title>{city.name} - OnFood App</title>
+                <meta name="description" content={`As melhores opções de delivery em ${city.name}`} />
+                <link rel="icon" href="/favicon.ico" />
+            </Head>
+            <PageTemplate>
+                <div className={Styles.content}>
+                    <h1>Opções na região de {city.name}</h1>
+                    <p>Encontramos {city.catalogEstimated} opções</p>
+                    <div className={Styles.items}>
+                        <DishList citySlug={city.slug} />
+                    </div>
                 </div>
-            </div>
-        </PageTemplate>
+            </PageTemplate>
+        </>
+        
     )
 }
 
